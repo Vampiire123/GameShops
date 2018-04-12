@@ -54,11 +54,11 @@ public class Shop {
 
     @Override
     public String toString() {
-        return "\nName: " + this.name +
-                "\nAddress: " + this.address +
-                "\nZip: " + this.zipCode +
-                "\nLocality: " + this.locality +
-                "\nLatitude: " + this.latitude +
-                "\nLongitude: " + this.longitude;
+        return "\nName: " + this.name
+                + "\nAddress: " + this.address
+                + "\nZip: " + this.zipCode
+                + "\nLocality: " + this.locality
+                + "\nLatitude: " + this.latitude
+                + "\nLongitude: " + this.longitude;
     }
 }

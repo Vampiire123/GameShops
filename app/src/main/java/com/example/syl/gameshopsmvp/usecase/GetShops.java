@@ -1,6 +1,10 @@
 package com.example.syl.gameshopsmvp.usecase;
 
-interface GetShops {
+import com.example.syl.gameshopsmvp.global.model.Shop;
+
+import java.util.List;
+
+public interface GetShops {
     void getShops(Listener listener);
 
     interface Listener {
