@@ -23,7 +23,7 @@ public class ShopRenderer extends Renderer<Shop> {
     public ShopRenderer(Context ctx, OnShopClicked listener) {
         this.context = ctx.getApplicationContext();
 
-        if(listener != null){
+        if (listener != null) {
             this.listener = listener;
         }
     }

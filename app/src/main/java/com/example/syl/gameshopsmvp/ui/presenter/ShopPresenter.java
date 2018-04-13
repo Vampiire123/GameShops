@@ -48,7 +48,7 @@ public class ShopPresenter extends Presenter<ShopPresenter.View> {
 
     }
 
-    public void onShopClicked(Shop shop){
+    public void onShopClicked(Shop shop) {
         view.showShop(shop);
     }
 
