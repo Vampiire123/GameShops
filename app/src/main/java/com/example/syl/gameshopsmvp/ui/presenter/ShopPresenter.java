@@ -13,7 +13,6 @@ public class ShopPresenter extends Presenter<ShopPresenter.View> {
 
     protected GetShops getShops;
 
-    @Inject
     public ShopPresenter(Context ctx, GetShops getShops) {
         this.context = ctx;
         this.getShops = getShops;
@@ -21,7 +20,17 @@ public class ShopPresenter extends Presenter<ShopPresenter.View> {
 
     @Override
     public void initialize() {
+        getShops.getShops(new GetShops.Listener() {
+            @Override
+            public void onSuccess(List<Shop> shops) {
+                view.showShops(shops);
+            }
 
+            @Override
+            public void onError(String message) {
+                view.showError("Error getting shops");
+            }
+        });
     }
 
     @Override
@@ -39,9 +48,13 @@ public class ShopPresenter extends Presenter<ShopPresenter.View> {
 
     }
 
+    public void onShopClicked(Shop shop){
+        view.showShop(shop);
+    }
+
     public interface View {
         void showShops(List<Shop> shops);
-
+        void showShop(Shop shop);
         void showError(String message);
     }
 }

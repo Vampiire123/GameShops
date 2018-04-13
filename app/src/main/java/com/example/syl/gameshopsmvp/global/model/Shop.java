@@ -1,8 +1,17 @@
 package com.example.syl.gameshopsmvp.global.model;
 
 public class Shop {
-    String name, address, locality, zipCode;
+    int id;
+    String name, address, locality, zipCode, imageUrl;
     float latitude, longitude;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;
@@ -52,9 +61,18 @@ public class Shop {
         this.longitude = longitude;
     }
 
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
     @Override
     public String toString() {
-        return "\nName: " + this.name
+        return "\nID: " + this.id
+                + "\nName: " + this.name
                 + "\nAddress: " + this.address
                 + "\nZip: " + this.zipCode
                 + "\nLocality: " + this.locality
