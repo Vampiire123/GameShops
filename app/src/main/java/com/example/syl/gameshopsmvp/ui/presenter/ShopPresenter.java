@@ -28,7 +28,7 @@ public class ShopPresenter extends Presenter<ShopPresenter.View> {
 
             @Override
             public void onError(String message) {
-                view.showError("Error getting shops");
+                view.showError(message);
             }
         });
     }
