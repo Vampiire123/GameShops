@@ -7,6 +7,7 @@ import com.example.syl.gameshopsmvp.usecase.GetShops;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.invocation.InvocationOnMock;
@@ -15,6 +16,7 @@ import org.mockito.stubbing.Answer;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.junit.Assert.assertEquals;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.verify;
@@ -29,6 +31,8 @@ public class ShopPresenterTest {
     GetShops mockGetShops;
     @Mock
     ShopPresenter.View mockView;
+    @Mock
+    ShopPresenter.Navigator mockNavigator;
 
     @Before
     public void setUp() {
@@ -55,10 +59,23 @@ public class ShopPresenterTest {
     }
 
     @Test
-    public void shouldShowShopOnClick() {
-        shopPresenter.onShopClicked(any(Shop.class));
+    public void shouldNavigateToMapsActivityWithParametersOnShopClicked() {
+        Shop shop = new Shop();
+        shop.setName("Some name");
+        shop.setLatitude(37.000f);
+        shop.setLongitude(-3.00087879f);
+        shopPresenter.onShopClicked(shop);
 
-        verify(mockView).showShop(any(Shop.class));
+        ArgumentCaptor<String> stringArgumentCaptor = ArgumentCaptor.forClass(String.class);
+        ArgumentCaptor<Float> floatArgumentCaptorLatitude = ArgumentCaptor.forClass(Float.class);
+        ArgumentCaptor<Float> floatArgumentCaptorLongitude = ArgumentCaptor.forClass(Float.class);
+
+        verify(mockNavigator).navigateToMap(stringArgumentCaptor.capture(),
+                floatArgumentCaptorLongitude.capture(), floatArgumentCaptorLatitude.capture());
+
+        assertEquals(stringArgumentCaptor.getValue(), "Some name");
+        assertEquals(floatArgumentCaptorLatitude.getValue(), 37.000f, 0);
+        assertEquals(floatArgumentCaptorLongitude.getValue(), -3.00087879f, 0);
     }
 
     private void givenGetShopsListenerFailure() {
@@ -86,6 +103,7 @@ public class ShopPresenterTest {
     private ShopPresenter createAMockedPresenter() {
         ShopPresenter presenter = new ShopPresenter(mockContext, mockGetShops);
         presenter.setView(mockView);
+        presenter.setNavigator(mockNavigator);
         return presenter;
     }
 }

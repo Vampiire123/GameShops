@@ -1,5 +1,6 @@
 package com.example.syl.gameshopsmvp.ui.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -18,7 +19,7 @@ import com.pedrogomez.renderers.RVRendererAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ShopActivity extends BaseActivity implements ShopPresenter.View {
+public class ShopActivity extends BaseActivity implements ShopPresenter.View, ShopPresenter.Navigator {
 
     ShopPresenter shopPresenter;
 
@@ -35,6 +36,7 @@ public class ShopActivity extends BaseActivity implements ShopPresenter.View {
         shopPresenter = new ShopPresenter(this, getShopsMockImpl);
 
         shopPresenter.setView(this);
+        shopPresenter.setNavigator(this);
 
         adapter = new RVRendererAdapter<>(
                 LayoutInflater.from(this),
@@ -68,12 +70,15 @@ public class ShopActivity extends BaseActivity implements ShopPresenter.View {
     }
 
     @Override
-    public void showShop(Shop shop) {
-        Toast.makeText(this, shop.getName(), Toast.LENGTH_SHORT).show();
+    public void showError(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 
     @Override
-    public void showError(String message) {
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+    public void navigateToMap(String name, float longitude, float latitude) {
+        startActivity(new Intent(ShopActivity.this, MapsActivity.class)
+                .putExtra("name", name)
+                .putExtra("longitude", longitude)
+                .putExtra("latitude", latitude));
     }
 }

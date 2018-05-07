@@ -7,7 +7,7 @@ import com.example.syl.gameshopsmvp.usecase.GetShops;
 
 import java.util.List;
 
-public class ShopPresenter extends Presenter<ShopPresenter.View> {
+public class ShopPresenter extends Presenter<ShopPresenter.View, ShopPresenter.Navigator> {
 
     protected Context context;
 
@@ -49,12 +49,15 @@ public class ShopPresenter extends Presenter<ShopPresenter.View> {
     }
 
     public void onShopClicked(Shop shop) {
-        view.showShop(shop);
+        navigator.navigateToMap(shop.getName(), shop.getLongitude(), shop.getLatitude());
     }
 
     public interface View {
         void showShops(List<Shop> shops);
-        void showShop(Shop shop);
         void showError(String message);
+    }
+
+    public interface Navigator {
+        void navigateToMap(String name, float longitude, float latitude);
     }
 }
