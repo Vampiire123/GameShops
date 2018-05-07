@@ -4,6 +4,7 @@ This app will shows you where are some Game Shops in Granada using Google Maps.
 ## What are we going to use?
 - Library play services map (Map)
 - MVP
+- Renderer
 
 ## Developed By
 - Sylvia Domenech
