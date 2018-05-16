@@ -1,3 +1,5 @@
+<a href="https://travis-ci.org/Vampiire123/GameShops"><img src="https://travis-ci.org/Vampiire123/GameShops.svg?branch=master"></a>
+
 # GameShops
 This app will shows you where are some Game Shops in Granada using Google Maps.
 
